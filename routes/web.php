@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'BooksController@showList');
+Route::get('/books/{id}', 'BooksController@showDetail');

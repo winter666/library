@@ -11,4 +11,9 @@ class BooksController extends Controller
     	$books = Books::paginate(6);
     	return view('books.list', compact('books'));
     }
+
+    public function ShowDetail ($id) {
+    	$book = Books::find($id);
+    	return view('books.detail', compact('book'));
+    }
 }
