@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'edit', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
-	Route::get('/{id}', 'DashboardController@dashboard')->name('admin.index');
+Route::get('/', function() {
+	return view('index');
 });
 
-Route::get('/', 'BooksController@showList');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
+	Route::get('/books/{id}', 'DashboardController@dashboard')->name('admin.index');
+});
+
+Route::get('/books', 'BooksController@showList');
 Route::get('/books/{id}', 'BooksController@showDetail');
+
+Route::get('/authors/', 'AuthorsController@showList');
+Route::get('/authors/{id}', 'AuthorsController@showDetail');
 
 Auth::routes();
 

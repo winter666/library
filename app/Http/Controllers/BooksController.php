@@ -14,7 +14,7 @@ class BooksController extends Controller
     	return view('books.list', compact('books', 'authors'));
     }
 
-    public function ShowDetail ($id) {
+    public function showDetail ($id) {
     	$book = Books::find($id);
     	$author = Authors::find($book->author_id);
     	return view('books.detail',  compact('book', 'author'));
