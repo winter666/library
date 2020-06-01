@@ -17,6 +17,8 @@ class Books extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->integer('author_id')->unsigned();
+            $table->foreign('author_id')->references('id')->on('authors');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class Books extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('books');
     }
 }
