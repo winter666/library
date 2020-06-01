@@ -37,6 +37,12 @@
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/><text fill="#eceeef" dy=".3em" x="45%" y="50%">Picture</text></svg>
                             <div class="card-body">
                             	<h5 class="card-title">{{$book->name}}</h5>
+                                <div>
+                                    <span>Author:</span>
+                                    <a href="/authors/{{$authors->find($book->id)['id']}}">
+                                        <span>{{$authors->find($book->author_id)["name"]}}</span>
+                                    </a>
+                                </div>
                                 <p class="card-text">{{$book->description}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">

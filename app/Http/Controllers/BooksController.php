@@ -10,17 +10,13 @@ class BooksController extends Controller
 {
     public function showList () {
     	$books = Books::paginate(6);
-    	return view('books.list', compact('books'));
+    	$authors = Authors::all();
+    	return view('books.list', compact('books', 'authors'));
     }
 
     public function ShowDetail ($id) {
     	$book = Books::find($id);
     	$author = Authors::find($book->author_id);
-    	return view('books.detail', 
-    		[
-    			'book' => $book, 
-    			'author' => $author
-    		]
-    	);
+    	return view('books.detail',  compact('book', 'author'));
     }
 }
