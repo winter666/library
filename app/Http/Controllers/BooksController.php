@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Books;
+use App\Authors;
 
 class BooksController extends Controller
 {
@@ -14,6 +15,12 @@ class BooksController extends Controller
 
     public function ShowDetail ($id) {
     	$book = Books::find($id);
-    	return view('books.detail', compact('book'));
+    	$author = Authors::find($book->author_id);
+    	return view('books.detail', 
+    		[
+    			'book' => $book, 
+    			'author' => $author
+    		]
+    	);
     }
 }
