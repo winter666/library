@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
-	Route::get('/', 'DashboardController@dashboard')->name('admin.index');
+Route::group(['prefix' => 'edit', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
+	Route::get('/{id}', 'DashboardController@dashboard')->name('admin.index');
 });
 
 Route::get('/', 'BooksController@showList');

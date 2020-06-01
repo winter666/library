@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h1>Admin Test</h1>
+        <h4>{{$book->name}}</h4>
+        <p>
+        	{{$book->description}}
+        </p>
     </div>
 @endsection
