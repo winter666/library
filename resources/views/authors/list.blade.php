@@ -15,7 +15,7 @@
             @foreach($authors as $author)
                 <tr>
                     <th scope="row">{{$author->id}}</th>
-                    <td><a href="/authors/{{$author->id}}">{{$author->name}}</a></td>
+                    <td><a href="{{route('authors')}}/{{$author->id}}">{{$author->name}}</a></td>
                     <td>{{count($books[$author->id])}}</td>
                 </tr>
             @endforeach    

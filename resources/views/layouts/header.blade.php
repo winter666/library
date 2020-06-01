@@ -6,8 +6,9 @@
           <h4 class="text-white">Navigation</h4>
           <ul class="list-unstyled">
             <li><a href="/" class="text-white">Main</a></li>
-            <li><a href="/books/" class="text-white">Books</a></li>
-            <li><a href="/authors/" class="text-white">Authors</a></li>
+            <li><a href="{{route('books')}}" class="text-white">Books</a></li>
+            <li><a href="{{route('authors')}}" class="text-white">Authors</a></li>
+            <li><a href="{{route('home')}}" class="text-white">Home</a></li>
           </ul>
         </div>
       </div>

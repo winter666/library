@@ -39,14 +39,14 @@
                             	<h5 class="card-title">{{$book->name}}</h5>
                                 <div>
                                     <span>Author:</span>
-                                    <a href="/authors/{{$authors->find($book->id)['id']}}">
+                                    <a href="{{route('authors')}}/{{$authors->find($book->id)['id']}}">
                                         <span>{{$authors->find($book->author_id)["name"]}}</span>
                                     </a>
                                 </div>
                                 <p class="card-text">{{$book->description}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="/books/{{$book->id}}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                        <a href="{{route('books')}}/{{$book->id}}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                     </div>
                                 </div>

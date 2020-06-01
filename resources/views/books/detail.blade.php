@@ -7,7 +7,7 @@
         <h2 class="title">{{$book->name}}</h2>
         <div class="detal_author">
         	<span>Author:</span>
-        	<a href="/authors/{{$author->id}}" class="author_detail">
+        	<a href="{{route('authors')}}/{{$author->id}}" class="author_detail">
         		<span class="author_value">{{$author->name}}</span>
         	</a>
         </div>

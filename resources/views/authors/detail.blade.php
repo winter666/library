@@ -45,7 +45,7 @@
                                 <p class="card-text">{{$book->description}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="/books/{{$book->id}}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                        <a href="{{route('books')}}/{{$book->id}}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                     </div>
                                 </div>
