@@ -18,7 +18,7 @@ Route::get('/', function() {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin']], function(){
-	Route::get('/books/{id}', 'BookController@show')->name('admin.index');
+	Route::get('/books/{id}', 'BookController@show')->name('admin.show');
 });
 
 Route::get('/books/', 'BooksController@showList')->name('books');
