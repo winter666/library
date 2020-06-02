@@ -5,27 +5,14 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">{{ config('app.name', 'My Books') }}</h1>
+            <h2>
+                <strong>(Books by {{$author->name}})</strong>    
+            </h2>
+            <div><span><a href="{{route('authors')}}">Show another authors</a></span></div>
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-            <p>
-                @guest
-                    <a href="{{ route('login') }}" class="btn btn-primary my-2">{{ __('Login') }}</a>
-                    @if (Route::has('register'))
-                        <a class="btn btn-secondary my-2" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @endif                    
-                @else
-                    <p class="lead text-muted">Hi, {{Auth::user()->name}}!</p>
-                    <a class="btn btn-primary my-2" href="{{ route('logout') }}"
-                        onclick="
-                            event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>                      
-                @endguest
-                <p class="lead text-muted"><strong>Books by {{$author->name}}</strong></p>    
-            </p>
+            @auth
+                <p class="lead text-muted">Hi, {{Auth::user()->name}}!</p>                     
+            @endauth
         </div>
     </section>
 
@@ -44,12 +31,12 @@
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="{{route('books')}}/{{$book->id}}">
+                                        <a href="{{route('books.index', $book->id)}}">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                         </a>
                                         @auth
                                             @if (Auth::user()->is_admin)
-                                                <a href="/admin/books/{{$book->id}}">
+                                                <a href="{{route('book.index', $book->id)}}">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                                 </a>
                                             @endif
