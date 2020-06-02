@@ -39,7 +39,7 @@
                             	<h5 class="card-title">{{$book->name}}</h5>
                                 <div>
                                     <span>Author:</span>
-                                    <a href="{{route('authors')}}/{{$authors->find($book->id)['id']}}">
+                                    <a href="{{route('authors')}}/{{$book->author_id}}">
                                         <span>{{$authors->find($book->author_id)["name"]}}</span>
                                     </a>
                                 </div>
