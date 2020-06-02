@@ -19,7 +19,10 @@ class AuthorsController extends Controller
 
     public function showDetail ($id) {
         $author = Authors::find($id);
-        $books = Books::all()->where('author_id', $author->id);
-        return view('authors.detail', compact('author', 'books'));
+        if ($author) {
+            $books = Books::all()->where('author_id', $author->id);
+            return view('authors.detail', compact('author', 'books'));
+        }
+        return redirect('404');
     }
 }
