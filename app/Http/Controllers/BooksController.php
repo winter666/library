@@ -16,7 +16,10 @@ class BooksController extends Controller
 
     public function showDetail ($id) {
     	$book = Books::find($id);
-    	$author = Authors::find($book->author_id);
-    	return view('books.detail',  compact('book', 'author'));
+        if ($book) {
+        	$author = Authors::find($book->author_id);
+        	return view('books.detail',  compact('book', 'author'));
+        }
+        return redirect('404');
     }
 }
