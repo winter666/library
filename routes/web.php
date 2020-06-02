@@ -18,14 +18,15 @@ Route::get('/', function() {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin']], function(){
-	Route::get('/books/{id}', 'BookController@show')->name('admin.show');
+	Route::get('/books/{id}', 'BookController@show')->name('book.index');
+	Route::delete('/books/{id}', 'BookController@destroy')->name('book.destroy');
 });
 
 Route::get('/books/', 'BooksController@showList')->name('books');
-Route::get('/books/{id}', 'BooksController@showDetail');
+Route::get('/books/{id}', 'BooksController@showDetail')->name('books.index');
 
 Route::get('/authors/', 'AuthorsController@showList')->name('authors');
-Route::get('/authors/{id}', 'AuthorsController@showDetail');
+Route::get('/authors/{id}', 'AuthorsController@showDetail')->name('authors.index');
 
 Auth::routes();
 

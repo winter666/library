@@ -15,18 +15,18 @@
                             	<h5 class="card-title">{{$book->name}}</h5>
                                 <p>
                                     <span>Author:</span>
-                                    <a href="{{route('authors')}}/{{$book->author_id}}">
+                                    <a href="{{route('authors.index', $book->author_id)}}">
                                         <span>{{$authors->find($book->author_id)["name"]}}</span>
                                     </a>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="{{route('books')}}/{{$book->id}}">
+                                        <a href="{{route('books.index', $book->id)}}">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                         </a>
                                         @auth
                                             @if (Auth::user()->is_admin)
-                                                <a href="/admin/books/{{$book->id}}">
+                                                <a href="{{route('book.index', $book->id)}}">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                                 </a>
                                             @endif
