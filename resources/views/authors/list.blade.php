@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('layouts.section')
+
 <div class="container">
     <table class="table table-dark">
         <thead>
