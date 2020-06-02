@@ -17,7 +17,7 @@ Route::get('/', function() {
 	return view('index');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin']], function(){
 	Route::get('/books/{id}', 'BookController@show')->name('admin.index');
 });
 
