@@ -1,3 +1,6 @@
+.update_book-btn {
+  margin: 1% 0;
+}
 .add_book-btn {
   margin: 2% 0;
 }
@@ -31,6 +34,7 @@
 }
 .modal-window .form-create_book {
   padding: 10% 0;
+  text-align: center;  
 }
 .modal-window .form-create_book .input-create {
   width: 80%; 
