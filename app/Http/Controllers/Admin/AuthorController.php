@@ -37,7 +37,9 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = Authors::create(['name' => $request->name]);
+        $data = ['id' => $res->id, 'name' => $request->name, 'html' => $request->html];
+        return json_encode($data);        
     }
 
     /**

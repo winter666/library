@@ -29,6 +29,7 @@ Route::get('/books/', 'BooksController@showList')->name('books');
 Route::get('/books/{id}', 'BooksController@showDetail')->name('books.index');
 
 Route::get('/authors/', 'AuthorsController@showList')->name('authors');
+Route::post('/authors/', 'Admin\AuthorController@store')->name('author.store')->middleware('admin');
 Route::get('/authors/{id}', 'AuthorsController@showDetail')->name('authors.index');
 
 Auth::routes();

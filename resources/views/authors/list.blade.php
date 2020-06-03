@@ -15,14 +15,14 @@
                 <span class="close_btn">X</span>
             </div>
             <div class="form-create_book">
-                <form action="#" method="POST">
+                <div>
                     <h4 class="form_title">Create Author</h4>
                     <div class="input-create">
                         <label for="author_name">Name</label><br>
-                        <input type="text" name="name" id="author_name">
+                        <input type="text" name="name" id="author_name" required="required">
                     </div>
                     <button class="btn btn-sm btn-outline-secondary" id="evt-create">Add</button>
-                </form>
+                </div>
             </div>    
         </div>     
     </div>    
@@ -39,7 +39,8 @@
                 @endauth
             </tr>
         </thead>
-        <tbody>
+        <tbody id="result">
+            <?php ob_start(); ?>
             @foreach($authors as $author)
                 <tr>
                     <th scope="row">{{$author->id}}</th>
@@ -51,10 +52,46 @@
                         @endif
                     @endauth                    
                 </tr>
-            @endforeach    
+            @endforeach
+            <?= $html = ob_get_clean(); ?>
         </tbody>
     </table>
     {{$authors->links()}}
 </div> 
+<script type="text/javascript">
+$(function() {
+
+    $('#evt-create').on('click', addAuthor);
+
+    function addAuthor(evt){
+
+        evt.preventDefault();
+        var author_name = $('#author_name').val();
+
+        if (author_name) {
+            $.ajax({
+                url: '{{ route('author.store') }}',
+                type: "POST",
+                data: {
+                    name: author_name
+                },
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                success: function (data) {
+                    alert(data.name + " Успешно добавлен!");
+                    $('.background_shadow').css('display', 'none');
+                    $('.modal-window').css('display', 'none');
+                    $('#result').html(`<?= $html; ?><th scope="row">${data.id}</th><td><a href="/authors/${data.id}">${data.name}</a></td><td>0</td><td><a href="/admin/authors/${data.id}" class="btn btn-primary">Edit</a></td>`);
+                },
+                error: function (msg) {
+                    alert('Ошибка');
+                }
+            });
+        }    
+    }    
+});
+</script>
 
 @endsection
