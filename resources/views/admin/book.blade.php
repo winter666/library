@@ -50,7 +50,6 @@
                                     @endforeach
                                 </select>
                             </div>     
-                            <input type="hidden" name="author_id" value="{{$author->id}}">
                             <button class="btn btn-sm btn-outline-secondary" id="evt-create">Update</button>
                         </form>
                     </div>    
