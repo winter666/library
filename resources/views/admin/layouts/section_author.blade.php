@@ -14,7 +14,32 @@
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button class="btn btn-sm btn-outline-secondary" id="evt-del" data-book_id="{{$author->id}}" data-route="/admin/authors/{{$author->id}}">Delete this Author and his books</button>
-                    </form> 
+                    </form>
+                    <div class="add_book-btn">
+                        <button class="btn btn-sm btn-outline-secondary" id="evt-modal">Add Book</button>
+                    </div>    
+                    <div class="background_shadow">
+                        <div class="modal-window">
+                            <div class="close">
+                                <span class="close_btn">X</span>
+                            </div>
+                            <div class="form-create_book">
+                                <form action="#" method="POST">
+                                    <h4 class="form_title">Create Book for {{$author->name}}</h4>
+                                    <div class="input-create">
+                                        <label for="book_name">Title</label><br>
+                                        <input type="text" name="name" id="book_name">
+                                    </div>
+                                    <div class="input-create">
+                                        <label for="book_desc">Description</label><br>
+                                        <textarea name="description" id="book_desc"></textarea>
+                                    </div>
+                                    <input type="hidden" name="author_id" value="{{$author->id}}">
+                                    <button class="btn btn-sm btn-outline-secondary" id="evt-create">Create</button>
+                                </form>
+                            </div>    
+                        </div>     
+                    </div>    
                 </div>
             @endif
         @endauth    

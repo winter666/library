@@ -1,3 +1,61 @@
+.add_book-btn {
+  margin: 2% 0;
+}
+.background_shadow, .modal-window {
+  display: none;
+}
+.background_shadow {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(50,50,50, 0.7);
+  padding-top: 5%;
+}
+
+.modal-window {
+  background-color: #fff;
+  width: 50%;
+  min-height: 50%;
+  max-height: 95%; 
+  margin: 0 auto;
+  border-radius: 7px;
+}
+.close {
+  padding: 5px 10px;
+}
+.close .close_btn {
+  cursor: pointer;
+}
+.modal-window .form-create_book {
+  padding: 10% 0;
+}
+.modal-window .form-create_book .input-create {
+  width: 80%; 
+  margin: 2% auto;
+  padding: 10px;
+  border: 1px solid rgba(50,50,50, 0.7);
+  border-radius: 7px;
+}
+.modal-window .form-create_book .input-create>label {
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.modal-window .form-create_book .input-create>input {
+  height: 30px;
+  width: 75%
+}
+.modal-window .form-create_book .input-create>textarea {
+  width: 80%;
+  resize: vertical;
+  overflow: auto;
+  max-height: 200px;
+}
+
+
 .btn-margin_right {
   margin-right: 10px;
 }
