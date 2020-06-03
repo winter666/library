@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('admin.layouts.section_author')
+@include('layouts.section_author')
 
     <div class="album py-5 bg-light">
         <div class="container">
