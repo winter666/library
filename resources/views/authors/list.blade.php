@@ -17,15 +17,17 @@
             <div class="form-create_book">
                 <div>
                     <h4 class="form_title">Create Author</h4>
+                    <div id="errors"></div>
                     <div class="input-create">
                         <label for="author_name">Name</label><br>
-                        <input type="text" name="name" id="author_name" required="required">
+                        <input type="text" name="name" id="author_name">
                     </div>
                     <button class="btn btn-sm btn-outline-secondary" id="evt-create">Add</button>
                 </div>
             </div>    
         </div>     
-    </div>    
+    </div>
+    <div id="success"></div>
     <table class="table table-dark">
         <thead>
             <tr>
@@ -65,31 +67,34 @@ $(function() {
 
     function addAuthor(evt){
 
-        evt.preventDefault();
         var author_name = $('#author_name').val();
 
-        if (author_name) {
-            $.ajax({
-                url: '{{ route('author.store') }}',
-                type: "POST",
-                data: {
-                    name: author_name
-                },
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                dataType: 'json',
-                success: function (data) {
-                    alert(data.name + " Успешно добавлен!");
+        $.ajax({
+            url: '{{ route('author.store') }}',
+            type: "POST",
+            data: {
+                name: author_name
+            },
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.id > 0) {
                     $('.background_shadow').css('display', 'none');
                     $('.modal-window').css('display', 'none');
                     $('#result').html(`<?= $html; ?><th scope="row">${data.id}</th><td><a href="/authors/${data.id}">${data.name}</a></td><td>0</td><td><a href="/admin/authors/${data.id}" class="btn btn-primary">Edit</a></td>`);
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
-            });
-        }    
+                    $('#success').prepend(`<div class="success_mess">${data.message}</div>`);
+                    $('#errors').html('');
+                    $('#author_name').val('');
+                } else {
+                    $('#errors').prepend(`<div class="error_mess">${data.message}</div>`);
+                }    
+            },
+            error: function (msg) {
+                console.log('Ошибка '+msg);
+            }
+        });   
     }    
 });
 </script>

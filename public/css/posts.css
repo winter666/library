@@ -1,3 +1,22 @@
+#errors {
+  max-height: 100px;
+  overflow: auto;
+}
+#errors .error_mess {
+  background-color: red;
+  color: #fff;
+}
+
+#success {
+  max-height: 100px;
+  overflow: auto;
+}
+#success .success_mess {
+  background-color: green;
+  color: #fff;
+  text-align: center;
+}
+
 .update_book-btn {
   margin: 1% 0;
 }

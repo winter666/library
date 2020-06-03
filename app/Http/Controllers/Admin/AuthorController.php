@@ -37,9 +37,17 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        $res = Authors::create(['name' => $request->name]);
-        $data = ['id' => $res->id, 'name' => $request->name, 'html' => $request->html];
-        return json_encode($data);        
+        if (!empty($request->name)) {
+            $res = Authors::create(['name' => $request->name]);
+            $data = [
+                'id' => $res->id, 
+                'name' => $request->name, 
+                'message' => $request->name." Успешно добавлен",
+            ];
+            return json_encode($data);
+        }
+        $data = ['message' => 'Заполните обязательные поля!'];
+        return json_encode($data);
     }
 
     /**
