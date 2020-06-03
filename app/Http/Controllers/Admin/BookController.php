@@ -38,7 +38,26 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!empty($request->name) && !empty($request->author_id) && !empty($request->description)) {
+            $res = Books::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'author_id' => $request->author_id,
+            ]);
+            if ($res->id) {
+                $author = Authors::find($res->author_id);
+                $data = [
+                    'id' => $res->id, 
+                    'name' => $request->name,
+                    'author_id' => $author->id,
+                    'author' => $author->name,
+                    'message' => 'Книга "' . $request->name . '" Успешно добавлена (Автор: ' . $author->name . ')',
+                ];
+                return json_encode($data);
+            }
+        }
+        $data = ['message' => 'Не удалось добавить книгу'];
+        return json_encode($data);
     }
 
     /**
