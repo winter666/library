@@ -12,7 +12,7 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('css/posts.css')}}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/nav.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
   </head>
 
   <body>
