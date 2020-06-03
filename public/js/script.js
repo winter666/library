@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     $('#navbarDropdown').on('click', showNavbar);
     $('.navbar-toggler').on('click', showNavigation);
+    $('#evt-del').on('click', confirmEventDel);
 
 
     function showNavbar() {
@@ -10,6 +11,14 @@ $(document).ready(function(){
 
     function showNavigation() {
         $('#navbarHeader').toggle('display');
+    }
+
+    function confirmEventDel(evt) {
+    	if (confirm('Are you sure?')) {
+    		return true;
+    	} else {
+	    	evt.preventDefault();
+    	}
     }
 
 });

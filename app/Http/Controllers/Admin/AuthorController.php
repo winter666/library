@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Authors;
+use App\Books;
 
 class AuthorController extends Controller
 {
@@ -47,7 +48,12 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        //
+        $author = Authors::find($id);
+        if ($author) {
+            $books = Books::all()->where('author_id', $author->id);
+            return view('admin.author', compact('author', 'books'));
+        }
+        return redirect('404');        
     }
 
     /**
@@ -81,6 +87,17 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $author = Authors::find($id);
+        if ($author) {
+            $authorsBooks = Books::all()->where('author_id', $author->id);
+            if ($authorsBooks) {
+                foreach ($authorsBooks as $book) {
+                    $book->delete();
+                }
+            }
+            $author->delete();
+            return redirect(route('authors'));
+        }
+        return redirect('404');        
     }
 }

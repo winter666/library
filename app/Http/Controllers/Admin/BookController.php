@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Books;
+use App\Authors;
 
 
 class BookController extends Controller
@@ -48,8 +49,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Books::find($id); 
-        return view('admin.book', compact('book')); 
+        $book = Books::find($id);
+        $author = Authors::find($book->author_id);
+        return view('admin.book', compact('book', 'author')); 
     }
 
     /**
@@ -83,6 +85,11 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Books::find($id);
+        if ($book) {
+            $book->delete();
+            return redirect(route('books'));
+        }
+        return redirect('404');
     }
 }

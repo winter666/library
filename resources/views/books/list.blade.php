@@ -26,7 +26,7 @@
                                         </a>
                                         @auth
                                             @if (Auth::user()->is_admin)
-                                                <a href="{{route('book.index', $book->id)}}">
+                                                <a href="{{route('book.show', $book->id)}}">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                                 </a>
                                             @endif
