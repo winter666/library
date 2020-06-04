@@ -82,54 +82,57 @@
             {{$books->links()}}
         </div>
     </div>
+    @auth
+        @if (Auth::user()->is_admin)
+            <script type="text/javascript">
+                $(document).ready(function() {
 
-    <script type="text/javascript">
-        $(document).ready(function() {
+                    $('#addbook-form').on('submit', createBookforAuthor);
 
-            $('#addbook-form').on('submit', createBookforAuthor);
+                    function createBookforAuthor (evt) {
+                        var $data = {};
+                        $('#addbook-form').find('input, select').each(function() {
+                            $data[this.id] = $(this).val();
+                        });
+                        // для textarea достал отдельно, вместе почему то не заработало
+                        $data['book_desc'] = $('#book_desc').val();
 
-            function createBookforAuthor (evt) {
-                var $data = {};
-                $('#addbook-form').find('input, select').each(function() {
-                    $data[this.id] = $(this).val();
+                        $.ajax({
+                            url: '/books/',
+                            type: 'POST',
+                            data: {
+                                name: $data['book_name'],
+                                description: $data['book_desc'],
+                                author_id: $data['author_field']
+                            },
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                evt.preventDefault();
+                                if (data.id > 0) {
+                                    $('.background_shadow').css('display', 'none');
+                                    $('.modal-window').css('display', 'none');
+                                    $('#result').html(`<?= $html; ?><div class="col-md-4"><div class="card mb-4 shadow-sm"><svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/><text fill="#eceeef" dy=".3em" x="45%" y="50%">Picture</text></svg><div class="card-body"><h5 class="card-title">${data.name}</h5><p><span>Author:</span><a href="/admin/authors/${data.author_id}"><span>${data.author}</span></a></p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><a href="/books/${data.id}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a><a href="/admin/books/${data.id}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a></div></div></div></div></div>`);
+                                    $('#success').prepend(`<div class="success_mess">${data.message}</div>`);
+                                    $('#errors').html('');
+                                    $('#book_name').val('');
+                                    $('#book_desc').val('');
+                                } else {
+                                    $('#errors').prepend(`<div class="error_mess">${data.message}</div>`);
+                                } 
+                            },
+                            error: function(msg) {
+                                console.log(msg);
+                            }  
+                        });
+
+                        return false;         
+                    }
                 });
-                // для textarea достал отдельно, вместе почему то не заработало
-                $data['book_desc'] = $('#book_desc').val();
-
-                $.ajax({
-                    url: '/books/',
-                    type: 'POST',
-                    data: {
-                        name: $data['book_name'],
-                        description: $data['book_desc'],
-                        author_id: $data['author_field']
-                    },
-                    headers: {
-                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        evt.preventDefault();
-                        if (data.id > 0) {
-                            $('.background_shadow').css('display', 'none');
-                            $('.modal-window').css('display', 'none');
-                            $('#result').html(`<?= $html; ?><div class="col-md-4"><div class="card mb-4 shadow-sm"><svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/><text fill="#eceeef" dy=".3em" x="45%" y="50%">Picture</text></svg><div class="card-body"><h5 class="card-title">${data.name}</h5><p><span>Author:</span><a href="/admin/authors/${data.author_id}"><span>${data.author}</span></a></p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><a href="/books/${data.id}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a><a href="/admin/books/${data.id}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a></div></div></div></div></div>`);
-                            $('#success').prepend(`<div class="success_mess">${data.message}</div>`);
-                            $('#errors').html('');
-                            $('#book_name').val('');
-                            $('#book_desc').val('');
-                        } else {
-                            $('#errors').prepend(`<div class="error_mess">${data.message}</div>`);
-                        } 
-                    },
-                    error: function(msg) {
-                        console.log(msg);
-                    }  
-                });
-
-                return false;         
-            }
-        });
-    </script>    
+            </script>
+        @endif
+    @endauth            
 
 @endsection

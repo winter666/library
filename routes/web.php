@@ -20,6 +20,7 @@ Route::get('/', function() {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin']], function(){
 	Route::get('/books/{id}', 'BookController@show')->name('book.show');
 	Route::delete('/books/{id}', 'BookController@destroy')->name('book.destroy');
+	Route::post('/books/{id}', 'BookController@update')->name('book.update');
 	Route::post('/authors/{id}', 'BookController@store')->name('book.store');
 
 	Route::get('/authors/{id}', 'AuthorController@show')->name('author.show');

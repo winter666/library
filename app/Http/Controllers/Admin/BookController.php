@@ -97,7 +97,24 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!empty($request->name) && !empty($request->description) && !empty($request->author_id)) {
+            $book = Books::find($id);
+            $author = Authors::find($request->author_id);
+            if (!empty($book) && !empty($author)) {
+                $book->update($request->all());
+                $data = [
+                    'id' => $book->id,
+                    'name' => $book->name,
+                    'description' => $book->description,
+                    'author_id' => $book->author_id,
+                    'author' => $author->name,
+                    'message' => $book->name . " успешно редактирована (Автор: " . $author->name . ")"
+                ];
+            } else {
+                $data = ['message' => 'Не удалось сохранить изменения'];
+            }
+            return json_encode($data);
+        }
     }
 
     /**
