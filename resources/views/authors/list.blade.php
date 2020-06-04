@@ -5,29 +5,32 @@
 @include('layouts.section')
 
 <div class="container">
-
-    <div class="add_book-btn">
-        <button class="btn btn-sm btn-outline-secondary" id="evt-modal">Add Author</button>
-    </div>    
-    <div class="background_shadow">
-        <div class="modal-window">
-            <div class="close">
-                <span class="close_btn">X</span>
-            </div>
-            <div class="form-create_book">
-                <div>
-                    <h4 class="form_title">Create Author</h4>
-                    <div id="errors"></div>
-                    <div class="input-create">
-                        <label for="author_name">Name</label><br>
-                        <input type="text" name="name" id="author_name">
-                    </div>
-                    <button class="btn btn-sm btn-outline-secondary" id="evt-create">Add</button>
-                </div>
+    @auth
+        @if (Auth::user()->is_admin) 
+            <div class="add_book-btn">
+                <button class="btn btn-sm btn-outline-secondary" id="evt-modal">Add Author</button>
             </div>    
-        </div>     
-    </div>
-    <div id="success"></div>
+            <div class="background_shadow">
+                <div class="modal-window">
+                    <div class="close">
+                        <span class="close_btn">X</span>
+                    </div>
+                    <div class="form-create_book">
+                        <div>
+                            <h4 class="form_title">Create Author</h4>
+                            <div id="errors"></div>
+                            <div class="input-create">
+                                <label for="author_name">Name</label><br>
+                                <input type="text" name="name" id="author_name">
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary" id="evt-create">Add</button>
+                        </div>
+                    </div>    
+                </div>     
+            </div>
+            <div id="success"></div>
+        @endif
+    @endauth        
     <table class="table table-dark">
         <thead>
             <tr>
