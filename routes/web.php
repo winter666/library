@@ -21,10 +21,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
 	Route::get('/books/{id}', 'BookController@show')->name('book.show');
 	Route::delete('/books/{id}', 'BookController@destroy')->name('book.destroy');
 	Route::post('/books/{id}', 'BookController@update')->name('book.update');
-	Route::post('/authors/{id}', 'BookController@store')->name('book.store');
+	Route::post('authors', 'BookController@store')->name('book.store');
 
 	Route::get('/authors/{id}', 'AuthorController@show')->name('author.show');
 	Route::delete('/authors/{id}', 'AuthorController@destroy')->name('author.destroy');
+	Route::post('/authors/{id}', 'AuthorController@update')->name('author.update');
 });
 
 Route::get('/books/', 'BooksController@showList')->name('books');

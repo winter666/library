@@ -86,7 +86,21 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!empty($request->name)) {
+            $author = Authors::find($id);
+            if ($author) {
+                $author->update($request->all());
+                $data = [
+                    'id' => $author->id,
+                    'name' => $author->name,
+                    'message' => 'Автор успешно отредактирован!',
+                ];
+                return json_encode($data);
+            }
+            $data = ['message' => 'Автор не найден'];    
+        } 
+        $data = ['message' => 'Заполните обязательные поля112122'];
+        return json_encode($data);
     }
 
     /**

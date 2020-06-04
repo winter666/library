@@ -1,17 +1,17 @@
-#errors {
+#errors, #errors_update {
   max-height: 100px;
   overflow: auto;
 }
-#errors .error_mess {
+#errors .error_mess, #errors_update .error_mess {
   background-color: red;
   color: #fff;
 }
 
-#success {
+#success, #success_update {
   max-height: 100px;
   overflow: auto;
 }
-#success .success_mess {
+#success .success_mess, #success_update .success_mess {
   background-color: green;
   color: #fff;
   text-align: center;
@@ -48,7 +48,8 @@
 .close {
   padding: 5px 10px;
 }
-.close .close_btn {
+.close .close_btn,
+.close .pointer {
   cursor: pointer;
 }
 .modal-window .form-create_book {

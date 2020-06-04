@@ -43,7 +43,7 @@
                                 <h5 class="card-title">{{$book->name}}</h5>
                                 <p>
                                     <span>Author:</span>
-                                    <span><strong>{{$author->name}}</strong></span>
+                                    <span><strong class="author_name">{{$author->name}}</strong></span>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
@@ -74,9 +74,12 @@
             var bookName = $('#book_name').val();
             var bookDesc = $('#book_desc').val();
             var authorId = $('#author_id').val();
+            console.log(bookName);
+            console.log(bookDesc);
+            console.log(authorId);
 
             $.ajax({
-                url: '{{'book.store'}}',
+                url: '{{route('book.store')}}',
                 type: 'POST',
                 data: {
                     name: bookName,
